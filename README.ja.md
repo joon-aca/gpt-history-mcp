@@ -44,7 +44,7 @@ claude mcp add --scope user gpt-history-mcp -- npx -y gpt-history-mcp
 ### クローンして使う
 
 ```sh
-git clone https://github.com/YunosukeYoshino/gpt-history-mcp.git
+git clone https://github.com/joon-aca/gpt-history-mcp.git
 cd gpt-history-mcp
 bun install
 ```

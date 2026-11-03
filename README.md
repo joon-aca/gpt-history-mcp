@@ -44,7 +44,7 @@ For other clients, use `"command": "npx"` and `"args": ["-y", "gpt-history-mcp"]
 ### From a clone
 
 ```sh
-git clone https://github.com/YunosukeYoshino/gpt-history-mcp.git
+git clone https://github.com/joon-aca/gpt-history-mcp.git
 cd gpt-history-mcp
 bun install
 ```

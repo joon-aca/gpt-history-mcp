@@ -48,7 +48,7 @@ Bump `version` in `package.json` first; the workflow fails if the tag does not e
 
 ```sh
 npm version patch   # bumps package.json, commits, tags vX.Y.Z
-git push origin main --follow-tags
+git push origin master --follow-tags
 ```
 
 ## When the API shape changes
