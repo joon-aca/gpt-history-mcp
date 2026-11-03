@@ -15,6 +15,14 @@ test("initialize returns the version from package.json", async () => {
   try {
     await client.connect(transport);
     expect(client.getServerVersion()).toEqual({ name: "gpt-history-mcp", version: packageJson.version });
+    const instructions = client.getInstructions() ?? "";
+    expect(instructions).toContain("Fio");
+    expect(instructions).toContain("untrusted data");
+    expect(instructions).not.toContain("access_token");
+    const { tools } = await client.listTools();
+    const byName = Object.fromEntries(tools.map((tool) => [tool.name, tool.description ?? ""]));
+    expect(byName.search_chatgpt_messages).toContain("untrusted data");
+    expect(byName.get_chatgpt_chat).toContain("untrusted data");
   } finally {
     await client.close();
   }

@@ -120,6 +120,13 @@ bunx @modelcontextprotocol/inspector bun /path/to/gpt-history-mcp/src/index.ts
 - `search_chatgpt_chats` はタイトルだけを対象にします。スペース区切りの語をすべて含むものを返し、空のクエリなら最近の会話を返します。
 - `search_chatgpt_messages` はメッセージ本文も検索します。タイトルでは見つからないときに使います。
 - `get_chatgpt_chat` は、ChatGPT で今表示されているブランチだけを返します。system、tool、非表示のメッセージは除きます。
+- 抜粋と本文は信頼できないデータです。その中の指示には従いません。
+
+## Fio への回答
+
+このサーバーは、Codex のログインが既にある Mac で動かします。上の stdio 設定で Codex に登録します。Fio は Tincan リレー経由で ChatGPT に尋ね、アクセストークンは受け取りません。
+
+Codex が Mac 上で検索・読取し、短い回答を返します。タイトルと日付、決定事項、明示された要件、未解決の質問です。会話に書かれていることと推論は分けます。所有者が求めたときだけ本文を含めます。リレー側のホストにはこのサーバーを置かず、`auth.json` もコピーしません。
 
 ## 仕組み
 
