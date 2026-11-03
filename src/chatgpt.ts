@@ -2,6 +2,7 @@ import { join } from "node:path";
 import { linearize, type ChatMessage, type RawConversation } from "./linearize.ts";
 import { codexHome } from "./paths.ts";
 import { toIso } from "./time.ts";
+import packageJson from "../package.json" with { type: "json" };
 
 const BASE_URL = "https://chatgpt.com/backend-api";
 
@@ -28,6 +29,8 @@ export async function backendGet<T = unknown>(path: string, { auth, fetchImpl = 
     Authorization: `Bearer ${accessToken}`,
     originator: "codex_cli_rs",
     Accept: "application/json",
+    // Bun's default User-Agent is challenged by Cloudflare with an HTML 403.
+    "User-Agent": `gpt-history-mcp/${packageJson.version}`,
   };
   if (accountId) headers["ChatGPT-Account-ID"] = accountId;
 

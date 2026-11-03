@@ -2,6 +2,7 @@ import { expect, test } from "bun:test";
 import { mkdtempSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import packageJson from "../package.json" with { type: "json" };
 import { backendGet, readAuth, searchConversations } from "../src/chatgpt.ts";
 
 const auth = { accessToken: "secret-token", accountId: "acct-1" };
@@ -23,7 +24,10 @@ test("sends bearer token, account id and codex originator to chatgpt.com backend
     Authorization: "Bearer secret-token",
     "ChatGPT-Account-ID": "acct-1",
     originator: "codex_cli_rs",
+    "User-Agent": `gpt-history-mcp/${packageJson.version}`,
   });
+  expect(calls[0]?.headers.Authorization).toContain("secret-token");
+  expect(calls[0]?.headers["User-Agent"]).not.toContain("secret-token");
 });
 
 test("explains 401 as an expired Codex login without leaking the token", async () => {
